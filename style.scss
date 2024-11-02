@@ -1,0 +1,78 @@
+@import url('https://fonts.googleapis.com/css2?family=Bree+Serif&family=Merriweather:wght@400;700&family=Roboto+Slab:wght@400;700&display=swap');
+
+// Colores y fuentes
+$offwhite: #EEE8D6;
+$darkblue: #022933;
+$red: #D14348;
+$blue: #0076A3;
+
+$font-main: 'Merriweather', Helvetica, sans-serif;
+$font-highlight: 'Bree Serif', Helvetica, sans-serif;
+
+// Definición del mixin 'responsive' para media queries flexibles
+@mixin responsive($args...) {
+  @if length($args) == 1 {
+    // Si solo hay un argumento, usarlo como min-width
+    @media (min-width: nth($args, 1)) {
+      @content;
+    }
+  } @else if length($args) == 2 {
+    // Si hay dos argumentos, el primero es min-width y el segundo max-width
+    @media (min-width: nth($args, 1)) and (max-width: nth($args, 2)) {
+      @content;
+    }
+  }
+}
+
+// Estilos generales
+html {
+  font-size: 62.5%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-size: 1.8rem;
+  font-family: $font-main;
+  color: $darkblue;
+  background-color: $offwhite;
+}
+
+.container {
+  width: 80%;
+  margin: 0 auto;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: $font-highlight;
+  color: $red;
+}
+
+// Estilos para el footer con el mixin aplicado
+footer {
+  margin-top: 20px;
+  min-height: 200px;
+  background-color: darken($blue, 15%);
+
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  ul li {
+    padding: 10px 5px;
+    float: left;
+  }
+
+  ul li a {
+    text-decoration: none;
+    padding: 10px 5px;
+    color: $offwhite;
+  }
+
+  // Llamada al mixin con el valor 600px para ocultar el footer en pantallas pequeñas
+  @include responsive(600px) {
+    display: none;
+  }
+}
